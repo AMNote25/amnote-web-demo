@@ -23,5 +23,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "proxy.js"]
+  "include": ["src", "src/netlify/functions/proxy.js"]
 }
