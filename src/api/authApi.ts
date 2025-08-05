@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = '/api' // Sử dụng proxy của Vite cho đường dẫn API // NHUT TEST
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export interface LoginParams {
   username: string
