@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const BASE_URL = '/.netlify/functions/proxy';
 
 export interface LoginParams {
   username: string
@@ -8,7 +9,7 @@ export interface LoginParams {
 }
 
 export async function login({ username, password, companyID, Lag = "VIET" }: LoginParams) {
-  const response = await fetch(`${API_BASE_URL}/api/login`, {
+  const response = await fetch(`${BASE_URL}/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +22,7 @@ export async function login({ username, password, companyID, Lag = "VIET" }: Log
 
 export async function logout() {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/logout`, {
+    const response = await fetch(`${BASE_URL}/api/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
