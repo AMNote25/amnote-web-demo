@@ -45,7 +45,8 @@ function mapApiCustomer(apiData: ApiCustomer): CustomerItem {
   }
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = '/api' // Sử dụng proxy của Vite cho đường dẫn API // NHUT TEST
 const API_CUSTOMER = `${API_BASE_URL}/api/CustomerInfo`;
 
 export async function getAllCustomer(): Promise<{ status: string; data?: CustomerItem[]; messages?: string[] }> {

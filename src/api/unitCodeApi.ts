@@ -1,6 +1,7 @@
 import type { UnitCodeItem } from "../types/unitCode";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = '/api' // Sử dụng proxy của Vite cho đường dẫn API // NHUT TEST
 const API_UNITCODE = `${API_BASE_URL}/api/ProductUnitInfo`;
 
 function getAuthHeaders() {
