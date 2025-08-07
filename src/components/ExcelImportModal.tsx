@@ -115,7 +115,7 @@ const ExcelImportModal: React.FC<ExcelImportModalProps> = ({ onClose }) => {
                   >
                     {step.number}
                   </div>
-                  <span className={`ml-2 text-sm font-medium ${step.active ? "text-gray-900" : "text-gray-600"}`}>
+                  <span className={`ml-2 text-sm font-medium ${step.active ? "text-gray-800" : "text-gray-600"}`}>
                     {step.title}
                   </span>
                 </div>
@@ -131,7 +131,7 @@ const ExcelImportModal: React.FC<ExcelImportModalProps> = ({ onClose }) => {
             {/* Left Column - File Selection */}
             <div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-900 mb-2">
+                <label className="block text-sm font-medium text-gray-800 mb-2">
                   Chọn tệp Excel <span className="text-red-500">*</span>
                 </label>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
@@ -180,7 +180,7 @@ const ExcelImportModal: React.FC<ExcelImportModalProps> = ({ onClose }) => {
             <div className="space-y-6">
               {/* Sheet Selection */}
               <div>
-                <label className="block text-sm font-medium text-gray-900 mb-2">
+                <label className="block text-sm font-medium text-gray-800 mb-2">
                   Sheet chứa dữ liệu <span className="text-red-500">*</span>
                 </label>
                 <Select
@@ -200,7 +200,7 @@ const ExcelImportModal: React.FC<ExcelImportModalProps> = ({ onClose }) => {
 
               {/* Header Row */}
               {/* <div>
-                <label className="block text-sm font-medium text-gray-900 mb-2">Dòng tiêu đề</label>
+                <label className="block text-sm font-medium text-gray-800 mb-2">Dòng tiêu đề</label>
                 <p className="text-sm text-gray-600 mb-2">Nhập số dòng chứa tiêu đề cột (ví dụ: 1)</p>
                 <input
                   type="number"

@@ -469,7 +469,7 @@ export default function CustomerForm({ onClose, mode = "add", customer, onSave, 
                     size="md"
                     isLoading={isSaving}
                     leftIcon={<DocumentCheckIcon className="w-5 h-5" />}
-                    className="min-w-[100px] bg-blue-600 hover:bg-blue-900 text-white font-semibold"
+                    className="min-w-[100px] bg-blue-600 hover:bg-blue-800 text-white font-semibold"
                   >
                     Lưu
                   </Button>

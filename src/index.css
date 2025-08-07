@@ -39,3 +39,14 @@ body {
 .dark ::-webkit-scrollbar-thumb:hover {
   background: bg-gray-500;
 }
+
+/* Custom styles for DevExtreme DataGrid */
+/* Đổi màu icon edit */
+.dx-datagrid .dx-link-edit {
+  color: #2563eb !important; /* Tailwind: text-blue-600 */
+}
+
+/* Đổi màu icon delete */
+.dx-datagrid .dx-link-delete {
+  color: #dc2626 !important; /* Tailwind: text-red-600 */
+}

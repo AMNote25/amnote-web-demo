@@ -34,7 +34,7 @@ export const navigation: NavigationItem[] = [
     current: false,
     children: [
       { id: "company", name: "Quản lý công ty", href: "#", icon: ChevronRightIcon, current: false, disabled: true },
-      { id: "user", name: "Quản lý người dùng", href: "#", icon: ChevronRightIcon, current: false, disabled: true },
+      { id: "user", name: "Quản lý người dùng", href: "#", icon: ChevronRightIcon, current: false },
       { id: "cost_object", name: "Đối tượng tập hợp chi phí", href: "#", icon: ChevronRightIcon, current: false, disabled: true },
       { id: "customer", name: "Quản lý khách hàng", href: "#", icon: ChevronRightIcon, current: false },
       { id: "bank", name: "Quản lý ngân hàng", href: "#", icon: ChevronRightIcon, current: false },

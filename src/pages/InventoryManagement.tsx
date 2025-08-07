@@ -44,7 +44,6 @@ export default function InventoryManagement() {
   }
   // State cho sắp xếp bảng
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
-
   const [searchTerm, setSearchTerm] = useState("")
   const [showExcelImport, setShowExcelImport] = useState(false)
   const [items, setItems] = useState<InventoryItem[]>([])
@@ -406,7 +405,7 @@ export default function InventoryManagement() {
           <div className="flex items-center justify-between mb-4 gap-2">
             <div className="flex items-center gap-2 justify-start w-full">
               <div className="text-left">
-                <h1 className="text-2xl font-semibold text-gray-900">Quản lý hàng tồn kho</h1>
+                <h1 className="text-2xl font-semibold text-gray-800">Quản lý hàng tồn kho</h1>
                 <p className="text-sm text-gray-600">Quản lý các mặt hàng tồn kho trong hệ thống</p>
               </div>
             </div>
@@ -774,7 +773,7 @@ export default function InventoryManagement() {
                   d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                 />
               </svg>
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No inventory items found</h3>
+              <h3 className="mt-2 text-sm font-medium text-gray-800">No inventory items found</h3>
               <p className="mt-1 text-sm text-gray-600">
                 {searchTerm ? "Try adjusting your search terms." : "Get started by adding a new item."}
               </p>
