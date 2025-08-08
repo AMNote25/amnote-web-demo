@@ -17,10 +17,10 @@ export interface InventoryPayload {
   MaterialInputQuantity: number;
   StoreCD: string;
   StandardCD: string;
-  FitnessStock: string;
-  UnitPrice: string;
-  FcUnitPirce: string;
-  ExRate: string;
+  FitnessStock: number;
+  UnitPrice: number;
+  FcUnitPirce: number;
+  ExRate: number;
   lblCCType: string;
   lblFCType: string;
   txtSummary: string;
