@@ -31,7 +31,7 @@ import type { InventoryPayload } from "../types/inventoryPayload"
 //   Origin: string;
 // }
 
-function mapApiInventory(apiData: InventoryItem): InventoryPayload{
+export function mapApiInventory(apiData: InventoryItem): InventoryPayload{
   return {
     DivisionCD: apiData.DIVISION_CD || "",
     PRODUCTKIND_CD: apiData.PRODUCTKIND_CD || "",

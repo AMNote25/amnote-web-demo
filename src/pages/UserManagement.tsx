@@ -1,14 +1,44 @@
-import type { InventoryItem } from "../types/inventory"
-import { getAllInventory } from "../api/inventoryApi"
 import React, { useState, useEffect } from "react"
-import 'devextreme/dist/css/dx.material.blue.light.css'; // theme
-import DataGrid, { ColumnChooser, ColumnChooserSearch, Position, ColumnChooserSelection, Column, Paging, Pager, FilterPanel, FilterRow, HeaderFilter, SearchPanel, Scrolling } from 'devextreme-react/data-grid';
-import { RequiredRule, Editing } from 'devextreme-react/data-grid';
-import type { RowInsertingEvent, RowUpdatingEvent, RowRemovingEvent } from "devextreme/ui/data_grid";
-import { insertInventory, updateInventory ,deleteInventory } from "../api/inventoryApi";
+
+import 'devextreme/dist/css/dx.material.blue.light.css'; // theme devextreme
+import {
+  DataGrid, 
+  ColumnChooser, 
+  ColumnChooserSearch, 
+  Position, 
+  ColumnChooserSelection, 
+  Column, 
+  Paging, 
+  Pager, 
+  FilterPanel, 
+  FilterRow, 
+  HeaderFilter, 
+  SearchPanel, 
+  Scrolling,
+  RequiredRule,
+  Editing
+} from 'devextreme-react/data-grid';
+import type { RowInsertingEvent } from "devextreme/ui/data_grid";
+// import type { 
+//   SavingEvent
+// } from "devextreme/ui/data_grid";
+// import dxDataGrid from "devextreme/ui/data_grid";
+
+import type { InventoryItem } from "../types/inventory"
+import { 
+  getAllInventory, 
+  insertInventory, 
+  // updateInventory,
+  // deleteInventory,
+  // mapApiInventory,
+} from "../api/inventoryApi";
+
 import NotificationModal, { type NotificationType } from "../components/NotificationModal";
+
 // import { TextBox } from 'devextreme-react/text-box';
 // import { Validator } from 'devextreme-react/validator';
+
+type RowInsertingEventWithPromise = RowInsertingEvent & { promise?: Promise<void> };
 
 const pageSizes = [10, 20, 50, 100];
 
@@ -46,8 +76,6 @@ const UserManagement: React.FC = () => {
       .finally(() => setLoading(false))
   }, [])
 
-  type RowInsertingEventWithPromise = RowInsertingEvent & { promise?: Promise<void> };
-
   const onRowInserting = (e: RowInsertingEventWithPromise) => {
     e.promise = (async () => {
       try {
@@ -68,8 +96,9 @@ const UserManagement: React.FC = () => {
             title: "Thất bại!",
             message: result.messages?.join("\n") || "Có lỗi xảy ra khi thêm hàng tồn kho!",
           });
-          e.cancel = true;
+          // e.cancel = true;
         }
+        e.cancel = true;
       } catch (error) {
         setNotification({
           isOpen: true,
@@ -83,52 +112,104 @@ const UserManagement: React.FC = () => {
   };
 
   // Cập nhật dữ liệu khi có thay đổi
-  const onRowUpdating = async (e: RowUpdatingEvent) => {
-    try {
-      const result = await updateInventory({ ...e.oldData, ...e.newData });
-      if (result.status === "success") {
-        setNotification({
-          isOpen: true,
-          type: "success",
-          title: "Thành công!",
-          message: "Đã cập nhật khách hàng thành công!",
-        });
-      } else {
-        setNotification({
-          isOpen: true,
-          type: "error",
-          title: "Thất bại!",
-          message: "Có lỗi xảy ra khi cập nhật khách hàng!",
-        });
-        e.cancel = true
-      }
+  // const onRowUpdating = async (e: RowUpdatingEvent) => {
+  //   try {
+  //     const result = await updateInventory({ ...e.oldData, ...e.newData });
+  //     if (result.status === "success") {
+  //       setNotification({
+  //         isOpen: true,
+  //         type: "success",
+  //         title: "Thành công!",
+  //         message: "Đã cập nhật khách hàng thành công!",
+  //       });
+  //     } else {
+  //       setNotification({
+  //         isOpen: true,
+  //         type: "error",
+  //         title: "Thất bại!",
+  //         message: "Có lỗi xảy ra khi cập nhật khách hàng!",
+  //       });
+  //       e.cancel = true
+  //     }
 
-      const data = await getAllInventory();
-      setItems(data.data || []);
-    } catch (error) {
-      console.error("Update error:", error);
-      setNotification({
-        isOpen: true,
-        type: "error",
-        title: "Thất bại!",
-        message: error instanceof Error ? error.message : "Có lỗi xảy ra khi cập nhật khách hàng!",
-      });
-      e.cancel = true;
+  //     const data = await getAllInventory();
+  //     setItems(data.data || []);
+  //   } catch (error) {
+  //     console.error("Update error:", error);
+  //     setNotification({
+  //       isOpen: true,
+  //       type: "error",
+  //       title: "Thất bại!",
+  //       message: error instanceof Error ? error.message : "Có lỗi xảy ra khi cập nhật khách hàng!",
+  //     });
+  //     e.cancel = true;
       
-      const data = await getAllInventory();
-      setItems(data.data || []);
-    }
-  };
+  //     const data = await getAllInventory();
+  //     setItems(data.data || []);
+  //   }
+  // };
 
-  const onRowRemoving = async (e: RowRemovingEvent) => {
-    try {
-      await deleteInventory(e.data.PRODUCT_CD);
-      const data = await getAllInventory();
-      setItems(data.data || []);
-    } catch (error) {
-      console.error("Delete error:", error);
-    }
-  };
+  // Xóa dữ liệu khi có thay đổi
+  // const onRowRemoving = async (e: RowRemovingEvent) => {
+  //   try {
+  //     await deleteInventory(e.data.PRODUCT_CD);
+  //     const data = await getAllInventory();
+  //     setItems(data.data || []);
+  //   } catch (error) {
+  //     console.error("Delete error:", error);
+  //   }
+  // };
+
+  // Hàm xử lý lưu dữ liệu trong chế độ batch
+  // const onSaving = (e: SavingEvent<InventoryItem, string>) => {
+  //   if (!e.changes || e.changes.length === 0) return;
+
+  //   e.cancel = true; // Ngăn DataGrid commit thay đổi ngay lập tức
+
+  //   e.promise = (async () => {
+  //     try {
+  //       for (const change of e.changes) {
+  //         if (change.type === "insert") {
+  //           // Map dữ liệu từ InventoryItem (snake_case) sang InventoryPayload (camelCase)
+  //           const payload = mapApiInventory(change.data as InventoryItem);
+  //           // console.log("Insert payload:", JSON.stringify(payload));
+  //           const result = await insertInventory(payload);
+  //           if (result.status !== "success") throw new Error(result.messages?.join("\n") || "Thêm thất bại!");
+  //         } else if (change.type === "update") {
+  //           // Merge key và data, ưu tiên data, rồi map sang InventoryPayload
+  //           const merged = { ...(change.key as unknown as InventoryItem), ...(change.data as Partial<InventoryItem>) };
+  //           const payload = mapApiInventory(merged);
+  //           // console.log("Update payload:", JSON.stringify(payload));
+  //           const result = await updateInventory(payload);
+  //           if (result.status !== "success") throw new Error(result.messages?.join("\n") || "Cập nhật thất bại!");
+  //         } else if (change.type === "remove") {
+  //           // Xóa theo PRODUCT_CD
+  //           const productCd = (change.key as unknown as InventoryItem).PRODUCT_CD;
+  //           const result = await deleteInventory(productCd);
+  //           if (result.status !== "success") throw new Error(result.messages?.join("\n") || "Xóa thất bại!");
+  //         }
+  //       }
+  //       // Nếu thành công, reload lại data
+  //       const data = await getAllInventory();
+  //       setItems(data.data || []);
+  //       setNotification({
+  //         isOpen: true,
+  //         type: "success",
+  //         title: "Thành công!",
+  //         message: "Lưu dữ liệu thành công!",
+  //       });
+  //       // Hủy trạng thái edit
+  //       (e.component as dxDataGrid).cancelEditData();
+  //     } catch (error) {
+  //       setNotification({
+  //         isOpen: true,
+  //         type: "error",
+  //         title: "Thất bại!",
+  //         message: error instanceof Error ? error.message : "Có lỗi xảy ra khi lưu dữ liệu!",
+  //       });
+  //     }
+  //   })();
+  // };
 
   return (
     <>
@@ -139,16 +220,6 @@ const UserManagement: React.FC = () => {
         message={notification.message}
         onClose={closeNotification}
       />
-      {/* <TextBox
-        id="address"
-        stylingMode="outlined"
-        hoverStateEnabled={false}
-        // focusStateEnabled={false}
-      >
-        <Validator>
-          <RequiredRule />
-        </Validator>
-      </TextBox> */}
 
       <DataGrid
         dataSource={items}
@@ -157,10 +228,17 @@ const UserManagement: React.FC = () => {
         hoverStateEnabled={true}
         loadPanel={{ enabled: loading }}
         columnWidth={200}
-        // Đăng ký đúng type cho handler
-        onRowInserting={(onRowInserting as unknown) as (e: RowInsertingEvent) => void}
-        onRowUpdating={onRowUpdating}
-        onRowRemoving={onRowRemoving}
+
+        // onSaving dùng trong chế độ batch
+        // onSaving={onSaving}
+
+        // onRowInserting, onRowUpdating, onRowRemoving dùng trong chế độ popup
+        // Đăng ký đúng type(onRowInserting) cho handler
+        // onRowInserting={(onRowInserting as unknown) as (e: RowInsertingEvent) => void}
+        onRowInserting={onRowInserting}
+        // onRowUpdating={onRowUpdating}
+        // onRowRemoving={onRowRemoving}
+
         allowColumnReordering={false}
         rowAlternationEnabled={false}
         onEditorPreparing={e => {
